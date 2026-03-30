@@ -9,6 +9,7 @@
 - name: Deploy Redmine
   hosts: webservers
   become: true
+  tags: [deploy]
 
   tasks:
     - name: Create app directory
@@ -32,3 +33,11 @@
         ports:
           - "{{ redmine_port }}:3000"
         env_file: /opt/redmine/.env
+
+- name: Setup DataDog
+  hosts: webservers
+  become: true
+  tags: [monitoring]
+
+  roles:
+    - role: datadog.datadog
