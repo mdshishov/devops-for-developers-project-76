@@ -40,4 +40,4 @@
   tags: [monitoring]
 
   roles:
-    - datadog.datadog
+    - datadog.dd.agent
