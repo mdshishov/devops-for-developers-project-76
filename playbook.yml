@@ -40,4 +40,4 @@
   tags: [monitoring]
 
   roles:
-    - role: datadog.datadog
+    - datadog.datadog
