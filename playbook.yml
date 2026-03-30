@@ -1,5 +1,5 @@
 - name: Prepare servers
-  hosts: all
+  hosts: webservers
   become: true
 
   roles:
@@ -7,7 +7,7 @@
     - geerlingguy.docker
 
 - name: Deploy Redmine
-  hosts: all
+  hosts: webservers
   become: true
 
   tasks:
