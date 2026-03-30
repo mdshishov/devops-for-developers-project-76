@@ -1,6 +1,33 @@
-- hosts: all
+- name: Prepare servers
+  hosts: all
   become: true
 
   roles:
     - geerlingguy.pip
     - geerlingguy.docker
+
+- name: Deploy Redmine
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Create app directory
+      file:
+        path: /opt/redmine
+        state: directory
+
+    - name: Generate .env file from template
+      template:
+        src: templates/redmine.env.j2
+        dest: /opt/redmine/.env
+        mode: "0644"
+
+    - name: Run Redmine container
+      community.docker.docker_container:
+        name: "{{ redmine_container_name }}"
+        image: "{{ redmine_image }}"
+        state: started
+        restart_policy: unless-stopped
+        ports:
+          - "{{ redmine_port }}:3000"
+        env_file: /opt/redmine/.env

@@ -1,0 +1,14 @@
+pip_install_packages:
+  - name: docker
+  - name: requests
+
+redmine_port: 80
+redmine_image: "redmine:latest"
+redmine_container_name: "redmine"
+
+redmine_db_host: "rc1a-himn4l9jchjkkgt1.mdb.yandexcloud.net,rc1b-hp0ub6ppegamcut1.mdb.yandexcloud.net"
+redmine_db_port: 6432
+redmine_db_name: "app_db"
+redmine_db_user: "app_user"
+redmine_db_password: "{{ vault_redmine_db_password }}"
+redmine_db_sslmode: "require"
